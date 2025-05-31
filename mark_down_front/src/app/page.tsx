@@ -1,36 +1,46 @@
 'use client'
 import styled from "@emotion/styled"
+import Editer from "@/app/editer";
+import Preview from "@/app/preview";
+import {useState} from "react";
+
+
 
 export default function Home() {
+  const [context, setcontext] = useState("")
+  const [title, setTitle] = useState("")
+
   return (
     <div>
       <Root>
-        <Container>
-          <Markdown></Markdown>
-          <Markdown></Markdown>
-        </Container>
+        <div style={{display: "flex", width: "fit-content", height: "fit-content"}}>
+        <EditerContainer>
+
+          <Editer titleValue={title} value={context} onChange={setcontext}/>
+        </EditerContainer>
+        <PreviewContainer>
+          <Preview content={context}/>
+        </PreviewContainer></div>
       </Root>
     </div>
   );
 }
 
 const Root = styled.div`
-display: flex;
+    display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    width: 100vw;
+    
+    
 `
 
-const Markdown = styled.textarea`
-  width: 500px;
-    height: 600px;
-    background-color: gray; 
-    border: none;
-    resize: none;
-    outline: none;;
+
+const EditerContainer = styled.div`
+
 `
 
-const Container = styled.div`
-padding: 10px;
-    display: flex;
-    gap: 10px;
+const PreviewContainer = styled.div`
+
 `
