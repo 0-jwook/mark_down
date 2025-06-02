@@ -27,6 +27,7 @@ const StyledTextArea = styled.textarea<{ isTitle?: boolean }>`
     text-align: left;
     line-height: ${({ isTitle }) => (isTitle ? "15vh" : "normal")};
     padding: 10px;
+    font-family: "pretendard";
 `;
 
 

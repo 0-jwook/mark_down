@@ -7,7 +7,7 @@ import {useState} from "react";
 
 
 export default function Home() {
-  const [context, setcontext] = useState("")
+  const [context, setcontext] = useState<string>("")
   // const [title, setTitle] = useState("")
 
   return (

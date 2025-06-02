@@ -24,13 +24,17 @@ function parseMarkdown(text: string): string {
     .replace(/`([^`]+)`/gim, '<code>$1</code>')
     // 링크 [text](url)
     .replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2" target="_blank">$1</a>')
+    .replace(/@([^@]+)@/gim, '<span class="spin">$1</span>')
+    .replace(/\^([^^]+)\^/gim, '<span class="bounce">$1</span>')
     // 줄바꿈
-    .replace(/\n$/gim, '<br />');
+    .replace(/\n/g, '<br />');
+
+
 }
 
 
 function Preview({ content }: Props) {
-  const html = parseMarkdown(content);
+  const html : string = parseMarkdown(content);
 
   return (
     <div style={{display: "flex", flexDirection: "column"}}>
@@ -49,8 +53,30 @@ const StyledPreview = styled.div`
     resize: none;
     outline: none;
     text-align: left;
-    line-height: normal;
+    line-height: normal;    
     padding: 10px;
+    font-family: "pretendard";
+    
+    
+    //애니메이션
+    
+    .spin {
+        display: inline-block;
+        animation: spin 2s linear infinite;
+    }
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .bounce {
+        display: inline-block;  
+        animation: bounce 0.01s ease-in-out infinite alternate;
+    }
+
+    @keyframes bounce {
+        0% { transform: translateY(5px); }
+        100% { transform: translateY(-5px); }
 `;
 
 export default Preview;
