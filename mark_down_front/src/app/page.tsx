@@ -8,7 +8,7 @@ import {useState} from "react";
 
 export default function Home() {
   const [context, setcontext] = useState("")
-  const [title, setTitle] = useState("")
+  // const [title, setTitle] = useState("")
 
   return (
     <div>
@@ -16,7 +16,7 @@ export default function Home() {
         <div style={{display: "flex", width: "fit-content", height: "fit-content"}}>
         <EditerContainer>
 
-          <Editer titleValue={title} value={context} onChange={setcontext}/>
+          <Editer value={context} onChange={setcontext}/>
         </EditerContainer>
         <PreviewContainer>
           <Preview content={context}/>

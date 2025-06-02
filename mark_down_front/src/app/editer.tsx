@@ -18,7 +18,7 @@ function Editer({ value, onChange} : Props) {
 const StyledTextArea = styled.textarea<{ isTitle?: boolean }>`
     width: 50vw;
     height: 100vh;
-    background-color: ${({ isTitle }) => (isTitle ? "transparent" : "blue")};
+    background-color: blue;
     font-size: ${({ isTitle }) => (isTitle ? "30px" : "15px")};
     font-weight: ${({ isTitle }) => (isTitle ? "bold" : "normal")};
     border: none;
@@ -26,7 +26,7 @@ const StyledTextArea = styled.textarea<{ isTitle?: boolean }>`
     outline: none;
     text-align: left;
     line-height: ${({ isTitle }) => (isTitle ? "15vh" : "normal")};
-    padding: ${({ isTitle }) => (isTitle ? "0px" : "10px")};
+    padding: 10px;
 `;
 
 

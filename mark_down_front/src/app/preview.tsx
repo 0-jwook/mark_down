@@ -25,16 +25,16 @@ function parseMarkdown(text: string): string {
     // 링크 [text](url)
     .replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2" target="_blank">$1</a>')
     // 줄바꿈
-    // .replace(/\n$/gim, '<br />');
+    .replace(/\n$/gim, '<br />');
 }
 
 
 function Preview({ content }: Props) {
+  const html = parseMarkdown(content);
+
   return (
-    <div className="prose max-w-none p-4 overflow-y-auto">
-      <StyledPreview>
-        {parseMarkdown(content)}
-      </StyledPreview>
+    <div style={{display: "flex", flexDirection: "column"}}>
+      <StyledPreview dangerouslySetInnerHTML={{ __html: html }}/>
     </div>
   );
 }
@@ -43,9 +43,17 @@ const StyledPreview = styled.div`
     width: 50vw;
     height: 100vh;
     background-color: red;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    word-break: break-word;
+    font-size: 15px;
+    font-weight: normal;
+    border: none;
+    resize: none;
+    outline: none;
+    text-align: left;
+    line-height: normal;
+    padding: 10px;
 `;
 
 export default Preview;
+
+
+
