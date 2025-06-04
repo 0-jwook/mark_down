@@ -2,26 +2,58 @@ from fastapi import FastAPI, Request
 from pydantic import BaseModel
 import pymysql
 from datetime import datetime
+from typing import List
 
 app = FastAPI()
 
-# DB 연결 정보
-connection = pymysql.connect(
-    host='localhost',         # 외부에서 접근할 때는 localhost
-    port=3310,                # 변경된 외부 포트
-    user='root',              # MySQL 사용자 이름
-    password='karina',        # 사용자 비밀번호
-    db='markdown',            # 사용할 데이터베이스 이름
-    charset='utf8mb4',        # 문자 인코딩
-    autocommit=True           # 자동 커밋
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # 개발 중에는 * 허용, 배포 시엔 도메인 지정
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
+
+
+
+
+# DB 연결 정보
+def get_db_connection():
+    return pymysql.connect(
+        host='127.0.0.1',
+        port=3310,
+        user='root',
+        password='karina',
+        db='markdown',
+        charset='utf8mb4',
+        cursorclass=pymysql.cursors.DictCursor,
+        autocommit=True
+    )
+
+
 
 class Content(BaseModel):
     content: str
 
 @app.post("/save")
 async def save_content(data: Content):
-    with connection.cursor() as cursor:
-        sql = "INSERT INTO documents (content, saved_at) VALUES (%s, %s)"
+    conn = get_db_connection()
+    with conn.cursor() as cursor:
+        sql = "UPDATE documents set content=%s, created_at=%s, updated_at=created_at where id =1"
         cursor.execute(sql, (data.content, datetime.now()))
     return {"message": "저장 완료!"}
+
+
+@app.get("/load")
+def load_content():
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cursor:
+            sql = "SELECT content FROM documents where id = 1"
+            cursor.execute(sql)
+            results = cursor.fetchall()
+        return results
+    finally:
+        conn.close()

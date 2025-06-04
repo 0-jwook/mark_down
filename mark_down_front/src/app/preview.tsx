@@ -5,7 +5,11 @@ type Props ={
 }
 
 
-function parseMarkdown(text: string): string {
+function parseMarkdown(text: string) {
+  if (typeof text !== "string") {
+    console.warn("text is not a string:", text);
+    text = String(text || "");
+  }
   return text
     // 제목 (# ~ ######)
     .replace(/^###### (.*$)/gim, '<h6>$1</h6>')
