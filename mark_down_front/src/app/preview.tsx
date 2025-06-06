@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 
 type Props ={
   content: string
+  title?: boolean
 }
 
 
@@ -37,28 +38,28 @@ function parseMarkdown(text: string) {
 }
 
 
-function Preview({ content }: Props) {
+function Preview({ content, title }: Props) {
   const html : string = parseMarkdown(content);
 
   return (
     <div style={{display: "flex", flexDirection: "column"}}>
-      <StyledPreview dangerouslySetInnerHTML={{ __html: html }}/>
+      <StyledPreview isTitle={title} dangerouslySetInnerHTML={{ __html: html }}/>
     </div>
   );
 }
 
-const StyledPreview = styled.div`
+const StyledPreview = styled.div<{ isTitle?: boolean }>`
+    height: ${({ isTitle }) => (isTitle ? "15vh" : "85vh")};
     width: 50vw;
-    height: 100vh;
     background-color: red;
-    font-size: 15px;
-    font-weight: normal;
+    font-size: ${({ isTitle }) => (isTitle ? "30px" : "15px")};
+    font-weight: ${({ isTitle }) => (isTitle ? "bold" : "normal")};
     border: none;
     resize: none;
     outline: none;
     text-align: left;
     line-height: normal;    
-    padding: 10px;
+    padding: 42px;
     font-family: "pretendard";
     
     
