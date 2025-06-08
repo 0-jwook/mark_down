@@ -11,11 +11,10 @@ function Helpbar(){
       <img src="/Line 4.svg" alt="l" />
       <Styledp isBold>B</Styledp>
       <Styledp isItalic isBold>L</Styledp>
+      <img src="/Line 4.svg" alt="l" />
     </Bar>
   )
 }
-
-
 
 const Bar = styled.div`
 display: flex;
@@ -24,8 +23,6 @@ display: flex;
     align-items: center;
     padding: 5px;
 `
-
-
 
 const Styledp = styled.p<{ isBold?: boolean, isItalic?:boolean}>`
 font-size: 12px;
