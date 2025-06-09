@@ -54,13 +54,15 @@ const StyledPreview = styled.div<{ isTitle?: boolean }>`
     background-color: red;
     font-size: ${({ isTitle }) => (isTitle ? "30px" : "15px")};
     font-weight: ${({ isTitle }) => (isTitle ? "bold" : "normal")};
-    border: none;
-    resize: none;
-    outline: none;
+    //border: none;
+    //resize: none;
+    //outline: none;
     text-align: left;
-    line-height: normal;    
-    padding: 42px;
+    line-height: normal;
+    padding: ${({ isTitle }) => (isTitle ? "60px 42px 0px " : "15px 42px")};
     font-family: "pretendard";
+    overflow: scroll;
+    overflow-x: hidden;
     
     
     //애니메이션

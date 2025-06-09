@@ -21,12 +21,12 @@ display: flex;
     width: 50vw;
     height: 5vh;
     align-items: center;
-    padding: 5px;
+    padding: 5px 38px;
 `
 
 const Styledp = styled.p<{ isBold?: boolean, isItalic?:boolean}>`
-font-size: 12px;
-    padding: 5px;
+font-size: 14px;
+    padding: 5px 7px;
     font-style: ${({ isItalic }) => (isItalic ? "italic" : "normal")};
     font-weight: ${({ isBold }) => (isBold ? "bold" : "normal")};
 `
