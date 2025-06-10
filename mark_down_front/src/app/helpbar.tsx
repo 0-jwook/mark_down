@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import Image from "next/image";
 type StyledpProps = {
   isBold?: boolean;
   isItalic?: boolean;
@@ -19,10 +20,10 @@ function Helpbar(){
       <Styledp>H2</Styledp>
       <Styledp>H3</Styledp>
       <Styledp>H4</Styledp>
-      <img src="/Line 4.svg" alt="l" />
+      <Image src="/Line 4.svg" alt="l" />
       <Styledp isBold>B</Styledp>
       <Styledp isItalic isBold>L</Styledp>
-      <img src="/Line 4.svg" alt="l" />
+      <Image src="/Line 4.svg" alt="l" />
     </Bar>
   )
 }
