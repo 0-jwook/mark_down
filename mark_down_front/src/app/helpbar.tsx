@@ -1,10 +1,21 @@
 import styled from "@emotion/styled";
-
+type StyledpProps = {
+  isBold?: boolean;
+  isItalic?: boolean;
+  onClick?: () => void;
+};
 
 function Helpbar(){
+
+  const handleClick = (label: string) => {
+    if( label === "h1"){
+
+    }
+  };
+
   return (
     <Bar>
-      <Styledp>H1</Styledp>
+      <Styledp onClick={()=>handleClick("h1")}>H1</Styledp>
       <Styledp>H2</Styledp>
       <Styledp>H3</Styledp>
       <Styledp>H4</Styledp>
@@ -24,7 +35,7 @@ display: flex;
     padding: 5px 38px;
 `
 
-const Styledp = styled.p<{ isBold?: boolean, isItalic?:boolean}>`
+const Styledp = styled.p<StyledpProps>`
 font-size: 14px;
     padding: 5px 7px;
     font-style: ${({ isItalic }) => (isItalic ? "italic" : "normal")};
