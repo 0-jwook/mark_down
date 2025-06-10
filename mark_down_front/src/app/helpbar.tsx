@@ -5,13 +5,13 @@ type StyledpProps = {
   isItalic?: boolean;
   onClick?: () => void;
 };
+type HelpbarProps = {
+  onFormat: (label: string) => void;
+};
 
-function Helpbar(){
-
+function Helpbar({ onFormat }: HelpbarProps) {
   const handleClick = (label: string) => {
-    if( label === "h1"){
-
-    }
+    onFormat?.(label);  // 상위로 이벤트 전달
   };
 
   return (
@@ -20,10 +20,10 @@ function Helpbar(){
       <Styledp>H2</Styledp>
       <Styledp>H3</Styledp>
       <Styledp>H4</Styledp>
-      <Image src="/Line 4.svg" alt="l" />
+      <img src="/Line 4.svg" alt="l" />
       <Styledp isBold>B</Styledp>
       <Styledp isItalic isBold>L</Styledp>
-      <Image src="/Line 4.svg" alt="l" />
+      <img src="/Line 4.svg" alt="l" />
     </Bar>
   )
 }

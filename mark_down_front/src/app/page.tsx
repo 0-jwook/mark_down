@@ -69,13 +69,19 @@ export default function Home() {
       });
   }, []);
 
+  const handleFormat = (label: string) => {
+    if (label === "h1") {
+      setcontent((prev) => prev + "\n# "); // 원하는 Markdown 태그 추가
+    }
+  };
+
   return (
     <div>
       <Root>
         {/*<div style={{display: "flex", width: "fit-content", height: "fit-content"}}>*/}
         <EditerContainer>
           <Editer title={true} value={title} onChange={settitle} />
-          <Helpbar/>
+          <Helpbar onFormat={handleFormat} />
           <Editer value={content} onChange={setcontent}/>
         </EditerContainer>
         <PreviewContainer>
