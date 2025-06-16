@@ -13,6 +13,7 @@ export default function Home() {
   const [title, settitle] = useState<string>("")
   const contentRef = useRef(content);
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null); // ref 생성
   contentRef.current = content;
 
 
@@ -70,8 +71,77 @@ export default function Home() {
   }, []);
 
   const handleFormat = (label: string) => {
-    if (label === "h1") {
-      setcontent((prev) => prev + "\n# "); // 원하는 Markdown 태그 추가
+    if (label === "h1") { setcontent((prev) => prev + "\n# ");  }
+    if (label === "h2") { setcontent((prev) => prev + "\n## ");  }
+    if (label === "h3") { setcontent((prev) => prev + "\n### ");  }
+    if (label === "h4") { setcontent((prev) => prev + "\n#### ");  }
+    if (label === "bold") {
+      if (!textareaRef.current) return;
+
+      const textarea = textareaRef.current;
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const selectedText = content.substring(start, end);
+
+      // 선택된 텍스트가 **로 감싸져 있으면 제거, 아니면 추가
+      let newText = "";
+      if (start === end) {
+        newText = "**텍스트**";
+      }else if (
+        selectedText.startsWith("**") &&
+        selectedText.endsWith("**") &&
+        selectedText.length >= 4
+      ) {
+        newText = selectedText.slice(2, -2);
+      } else {
+        newText = `**${selectedText}**`;
+      }
+
+      const updatedContent =
+        content.substring(0, start) + newText + content.substring(end);
+
+      setcontent(updatedContent);
+
+      // 선택 영역 위치 재설정
+      setTimeout(() => {
+        textarea.selectionStart = start;
+        textarea.selectionEnd = start + newText.length;
+        textarea.focus();
+      }, 0);
+    }
+    if (label === "italic") {
+      if (!textareaRef.current) return;
+
+      const textarea = textareaRef.current;
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const selectedText = content.substring(start, end);
+
+      // 선택된 텍스트가 **로 감싸져 있으면 제거, 아니면 추가
+      let newText = "";
+      if (start === end) {
+        newText = "_텍스트_";
+      }else if (
+        selectedText.startsWith("_") &&
+        selectedText.endsWith("_") &&
+        selectedText.length >= 4
+      ) {
+        newText = selectedText.slice(1, -1  );
+      } else {
+        newText = `_${selectedText}_`;
+      }
+
+      const updatedContent =
+        content.substring(0, start) + newText + content.substring(end);
+
+      setcontent(updatedContent);
+
+      // 선택 영역 위치 재설정
+      setTimeout(() => {
+        textarea.selectionStart = start;
+        textarea.selectionEnd = start + newText.length;
+        textarea.focus();
+      }, 0);
     }
   };
 
@@ -82,7 +152,7 @@ export default function Home() {
         <EditerContainer>
           <Editer title={true} value={title} onChange={settitle} />
           <Helpbar onFormat={handleFormat} />
-          <Editer value={content} onChange={setcontent}/>
+          <Editer value={content} onChange={setcontent} ref={textareaRef}/>
         </EditerContainer>
         <PreviewContainer>
           <Preview title={true} content={title}/>

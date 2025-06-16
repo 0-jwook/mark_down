@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import Image from "next/image";
 type StyledpProps = {
   isBold?: boolean;
   isItalic?: boolean;
@@ -17,12 +16,12 @@ function Helpbar({ onFormat }: HelpbarProps) {
   return (
     <Bar>
       <Styledp onClick={()=>handleClick("h1")}>H1</Styledp>
-      <Styledp>H2</Styledp>
-      <Styledp>H3</Styledp>
-      <Styledp>H4</Styledp>
+      <Styledp onClick={()=>handleClick("h2")}>H2</Styledp>
+      <Styledp onClick={()=>handleClick("h3")}>H3</Styledp>
+      <Styledp onClick={()=>handleClick("h4")}>H4</Styledp>
       <img src="/Line 4.svg" alt="l" />
-      <Styledp isBold>B</Styledp>
-      <Styledp isItalic isBold>L</Styledp>
+      <Styledp isBold onClick={()=>handleClick("bold")}>B</Styledp>
+      <Styledp isItalic isBold onClick={()=>handleClick("italic")}>L</Styledp>
       <img src="/Line 4.svg" alt="l" />
     </Bar>
   )

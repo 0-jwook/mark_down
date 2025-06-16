@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import {forwardRef} from "react";
 
 type Props = {
   value: string;
@@ -6,14 +7,14 @@ type Props = {
   title?: boolean;
 }
 
-function Editer({ value, onChange, title} : Props) {
+const Editer  = forwardRef<HTMLTextAreaElement, Props>(({ value, onChange, title }, ref) => {
   return(
     <div style={{display: "flex", flexDirection: "column"}}>
-      <StyledTextArea isTitle={title} value={value} onChange={e => onChange(e.target.value)}>
+      <StyledTextArea ref={ref} isTitle={title} value={value} onChange={e => onChange(e.target.value)}>
       </StyledTextArea>
     </div>
   )
-}
+})
 
 const StyledTextArea = styled.textarea<{ isTitle?: boolean }>`
     width: 50vw;
@@ -30,5 +31,7 @@ const StyledTextArea = styled.textarea<{ isTitle?: boolean }>`
     font-family: "pretendard";
 `;
 
+
+Editer.displayName = "Editer";
 
 export default Editer;
