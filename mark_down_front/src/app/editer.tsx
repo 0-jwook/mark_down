@@ -19,7 +19,7 @@ const Editer  = forwardRef<HTMLTextAreaElement, Props>(({ value, onChange, title
 const StyledTextArea = styled.textarea<{ isTitle?: boolean }>`
     width: 50vw;
     height: ${({ isTitle }) => (isTitle ? "15vh" : "80vh")};
-    background-color: blue;
+    background-color: white;
     font-size: ${({ isTitle }) => (isTitle ? "30px" : "15px")};
     font-weight: ${({ isTitle }) => (isTitle ? "bold" : "normal")};
     border: none;
@@ -27,7 +27,8 @@ const StyledTextArea = styled.textarea<{ isTitle?: boolean }>`
     outline: none;
     text-align: left;
     line-height: normal;
-    padding: ${({ isTitle }) => (isTitle ? "28px 42px 0px " : "15px 42px")};
+    color: black;
+    padding: ${({ isTitle }) => (isTitle ? "28px 42px 0px 42px" : "15px 42px")};
     font-family: "pretendard";
 `;
 

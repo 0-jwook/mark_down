@@ -47,9 +47,9 @@ function Preview({ content, title }: Props) {
 }
 
 const StyledPreview = styled.div<{ isTitle?: boolean }>`
-    height: ${({ isTitle }) => (isTitle ? "15vh" : "85vh")};
+    height: ${({ isTitle }) => (isTitle ? "20vh" : "80vh")};
     width: 50vw;
-    background-color: red;
+    background-color: white;
     font-size: ${({ isTitle }) => (isTitle ? "30px" : "15px")};
     font-weight: ${({ isTitle }) => (isTitle ? "bold" : "normal")};
     //border: none;
@@ -57,7 +57,7 @@ const StyledPreview = styled.div<{ isTitle?: boolean }>`
     //outline: none;
     text-align: left;
     line-height: normal;
-    padding: ${({ isTitle }) => (isTitle ? "60px 42px 0px " : "15px 42px")};
+    padding: ${({ isTitle }) => (isTitle ? "60px 42px " : "15px 42px")};
     font-family: "pretendard";
     overflow: scroll;
     overflow-x: hidden;

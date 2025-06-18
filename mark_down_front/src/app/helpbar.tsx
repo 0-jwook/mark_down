@@ -33,6 +33,7 @@ display: flex;
     height: 5vh;
     align-items: center;
     padding: 5px 38px;
+    background-color: beige;
 `
 
 const Styledp = styled.p<StyledpProps>`
